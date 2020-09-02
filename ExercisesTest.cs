@@ -93,7 +93,7 @@ namespace entra21_tests {
         }
 
         [Fact]
-        public void should_return_a_Sum_of_all_numbers_between_1_and_10 () {
+        public void should_return_a_Sum_of_all_numbers_between_1_and_100 () {
             // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 1c,
             // então a aplicação deverá retornar a soma dos numeros entre 1 a 100
 
@@ -117,38 +117,80 @@ namespace entra21_tests {
             // Soma = (1 + 100) x 100 / 2
             // Soma = 101 x 50
             // Soma = 5.050
-
         }
 
         [Fact]
-        public void should_return_a_Sum_of_all_numbers_between_1_and_100 () {
-            // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 1c,
-            // então a aplicação deverá retornar a soma dos numeros entre 1 a 100
 
-            // Dado / Setup
-            var exercises = new Exercises ();
-
-            // Quando / Ação
-            int returnedTotalSum = exercises.Exercise2 ();
-
-            // Deve / Asserções
-
-            Assert.Equal (returnedTotalSum, returnedTotalSum);
-
-        }
-
-        [Fact]
-        public void should_return_a_percent_of_women_between_18_and_35_years () {
+        public void should_return_a_percent_of_women_between_18_and_35_years_with_theory () {
 
             // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 5,
             // quando a aplicação receber a idade de 5 mulheres
             // deve retornar a porcentagem de mulheres que tem a idade entre 18 e 35
 
+            // dDado / Setup
             var exercises = new Exercises ();
+
+            //quando / ação
             int[] idades = new int[5] { 23, 25, 45, 69, 89 }; // é preciso instanciar e encapsular dentro da instancia
 
+            //Deve
             var resultado = exercises.Exercise5 (idades);
             Assert.Equal (40, resultado);
+
+        }
+
+        //  [Fact]
+
+        // public void Deve_Retornar_o_resultado_de_votaca0_Exerc6() 
+        // {
+
+        // }
+        //with theory , 2 tests ok
+        [Theory]
+
+        [InlineData (6, 3, 4.50, 1478.25)]
+        [InlineData (6,8, 3.50 , 3066)]
+        [InlineData (6, 5, 5.20,9854)]
+
+        public void Ex7_should_return_the_cost_of_cigarette_smoking_for_years (int years,int cigars, double price, double expected) 
+        {
+
+            // Dado que a aplicação está preparada. Quando o usuário chamar o exercício 7,
+            // quando a aplicação receber o números de cigarros consumidos por dia e a quantidade
+            //de anos de fumante deve retornar o custo total com duas casas decimais
+
+            //Dado setup
+            var exercises = new Exercises();
+            //Quando
+            var resultado = exercises.Exercise7(years,cigars,price);
+
+            // Deve
+            Assert.Equal (expected, resultado);
+
+
+        }
+
+        [Theory]
+
+        [InlineData (6,3,true)]
+        [InlineData (9,3, true)]
+        [InlineData (8,4,true)]
+
+        public void Ex7_should_return_True_if_number1_is_a_multiple_of_number2_Ex8 (int number1,int number2,bool expected) 
+        {
+
+            // Dado que a aplicação está preparada, quando o usuário chamar o exercicio 8
+            // quando a aplicação receber dois numeros inteiros, deve retornar True se o primeiro numero
+            //for multiplo do segundo numero
+
+            //Dado setup
+            var exercises = new Exercises();
+            //Quando
+            var isMultiple = exercises.Exercise8(number1,number2);
+
+            // Deve
+            Assert.Equal (expected, isMultiple);
+
 
         }
 
