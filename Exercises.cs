@@ -173,12 +173,10 @@ namespace entra21_tests {
 
         }
 
-        public double Exercise13_return_the_biggest (params int[] numbers) 
-        {
+        public double Exercise13_return_the_biggest (params int[] numbers) {
             double biggest = 0.0;
 
-            for (int i = 0; i < numbers.Length; i++) 
-            {
+            for (int i = 0; i < numbers.Length; i++) {
                 if (numbers[i] > biggest)
 
                 {
@@ -187,6 +185,54 @@ namespace entra21_tests {
             }
 
             return biggest;
+
+        }
+
+        public double[] Exercise14_ordering_three_values ( double[] numbers) 
+        
+        {
+
+            double temp = 0.0;
+            if (numbers[0] > numbers[2] || numbers[1] > numbers[2]) 
+            {
+
+                if (numbers[0] > numbers[2] && numbers[1] > numbers[2]) 
+                {
+                    if (numbers[0] > numbers[2]) 
+                    {
+                        temp = numbers[2];
+                        numbers[2] = numbers[0];
+                        numbers[0] = temp;
+                    } 
+                    else if (numbers[1] > numbers[2])
+                    {
+                        temp = numbers[2];
+                        numbers[2] = numbers[1];
+                        numbers[1] = temp;
+                    }
+                }
+
+                if (numbers[0] > numbers[2]) 
+                {
+                    temp = numbers[2];
+                    numbers[2] = numbers[0];
+                    numbers[0] = temp;
+                } 
+                else if (numbers[1] > numbers[2]) 
+                {
+                    temp = numbers[2];
+                    numbers[2] = numbers[1];
+                    numbers[1] = temp;
+                }
+            }
+
+            if (numbers[0] > numbers[1]) 
+            {
+                temp = numbers[1];
+                numbers[1] = numbers[0];
+                numbers[0] = temp;
+            }
+            return numbers;
 
         }
 
