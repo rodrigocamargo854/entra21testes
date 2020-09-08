@@ -149,11 +149,11 @@ namespace entra21_tests {
 
         public bool Exercise11_if_number2_equal_zero (double number1, double number2) => number2 == 0;
 
-        public double Exercise11_Division_of_number1_for_numer2 (double number1, double number2) => number1 / number2;
+        public double Exercise11_Division_of_number1_for_number2 (double number1, double number2) => number1 / number2;
 
         // Aplicação deverá receber 4 números e retornar a soma dos que forem pares.
 
-        public double Exercise12_SumPairs (double number1, double number2, double number3, double number4) {
+        public double Exercise12 (double number1, double number2, double number3, double number4) {
 
             double sumPairs = 0.0;
 
@@ -173,7 +173,7 @@ namespace entra21_tests {
 
         }
 
-        public double Exercise13_return_the_biggest (params int[] numbers) {
+        public double Exercise13 (params int[] numbers) {
             double biggest = 0.0;
 
             for (int i = 0; i < numbers.Length; i++) {
@@ -188,51 +188,114 @@ namespace entra21_tests {
 
         }
 
-        public double[] Exercise14_ordering_three_values ( double[] numbers) 
-        
+        public (int, int) Exercise15 (double[] numbers)
+
+        {
+
+            var multiplosDe3 = 0;
+            var multiplosDe5 = 0;
+
+            for (int i = 0; i < numbers.Length; i++) {
+                if (numbers[i] % 3 == 0)
+
+                {
+                    multiplosDe3++;
+
+                }
+
+                if (numbers[i] % 5 == 0)
+
+                {
+                    multiplosDe5++;
+
+                }
+            }
+
+            return (multiplosDe3, multiplosDe5);
+
+        }
+
+        public double[] Exercise14 (params double[] numbers)
+
         {
 
             double temp = 0.0;
-            if (numbers[0] > numbers[2] || numbers[1] > numbers[2]) 
-            {
 
-                if (numbers[0] > numbers[2] && numbers[1] > numbers[2]) 
-                {
-                    if (numbers[0] > numbers[2]) 
-                    {
+            if (numbers[0] > numbers[2] || numbers[1] > numbers[2]) {
+
+                if (numbers[0] > numbers[2] && numbers[1] > numbers[2]) {
+                    if (numbers[0] > numbers[2]) {
                         temp = numbers[2];
                         numbers[2] = numbers[0];
                         numbers[0] = temp;
-                    } 
-                    else if (numbers[1] > numbers[2])
-                    {
+                    } else if (numbers[1] > numbers[2]) {
                         temp = numbers[2];
                         numbers[2] = numbers[1];
                         numbers[1] = temp;
                     }
                 }
 
-                if (numbers[0] > numbers[2]) 
-                {
+                if (numbers[0] > numbers[2]) {
                     temp = numbers[2];
                     numbers[2] = numbers[0];
                     numbers[0] = temp;
-                } 
-                else if (numbers[1] > numbers[2]) 
-                {
+                } else if (numbers[1] > numbers[2]) {
                     temp = numbers[2];
                     numbers[2] = numbers[1];
                     numbers[1] = temp;
                 }
             }
 
-            if (numbers[0] > numbers[1]) 
-            {
+            if (numbers[0] > numbers[1]) {
                 temp = numbers[1];
                 numbers[1] = numbers[0];
                 numbers[0] = temp;
             }
+
             return numbers;
+
+        }
+
+        // A aplicação deverá receber um valor de salário double e retornar true 
+        // representando o evento ISENTO se o valor for menor que 600.00;
+        public double Exercicio16 (double initialSalary) {
+
+            if (initialSalary <= 600.00) {
+                return initialSalary;
+            } else if (initialSalary <= 1200.00) {
+                return initialSalary - (initialSalary * 0.2);
+            } else if (initialSalary > 1200.00 && initialSalary <= 2000.00) {
+                return initialSalary - (initialSalary * 0.25);
+            } else if (initialSalary < 2000.00) {
+                return initialSalary - (initialSalary * 0.50);
+            } else {
+                return (initialSalary - (initialSalary * 0.3));
+            }
+        }
+
+        public List<int> Exercisce17 (int number) {
+
+            var resultMult = new List<int> ();
+
+            for (int i = 1; i <= 10; i++)
+
+            {
+                resultMult.Add (number * i);
+            }
+
+            return resultMult;
+        }
+
+        public double Exercise18 (double numbApples) 
+        {
+
+            double precoMaca = 1.0;
+
+            var newPrice = (numbApples < 12 ) ? Math.Round((numbApples * 1.30), 2) : Math.Round((numbApples * 1.00), 2) ;
+            return newPrice;
+
+
+            // Math.Round((unitApples * 1.30), 2) < o 2 é para limitar 2 casas
 
         }
 

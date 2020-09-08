@@ -318,7 +318,7 @@ namespace entra21_tests {
             var exercises = new Exercises ();
 
             //Quando
-            var DivisionOfSecForFirst = exercises.Exercise11_Division_of_number1_for_numer2 (number1, number2);
+            var DivisionOfSecForFirst = exercises.Exercise11_Division_of_number1_for_number2 (number1, number2);
 
             // Deve
             Assert.Equal (expected, DivisionOfSecForFirst);
@@ -326,9 +326,9 @@ namespace entra21_tests {
 
         [Theory]
 
-        [InlineData (5,2,6,4,12)]
-        [InlineData (3,2,6,5,8)]
-        [InlineData (8,2,6,1,16)]
+        [InlineData (5, 2, 6, 4, 12)]
+        [InlineData (3, 2, 6, 5, 8)]
+        [InlineData (8, 2, 6, 1, 16)]
 
         public void Ex12_Sum_Of_Pairs (double number1, double number2, double number3, double number4, double result) {
 
@@ -341,7 +341,7 @@ namespace entra21_tests {
 
             //Quando
 
-            var resultSumPairs = exercises.Exercise12_SumPairs (number1,number2,number3,number4);
+            var resultSumPairs = exercises.Exercise12 (number1, number2, number3, number4);
 
             // Deve
             Assert.Equal (result, resultSumPairs);
@@ -349,8 +349,7 @@ namespace entra21_tests {
 
         [Fact]
 
-        public void Ex13_return_the_biggest ( ) 
-        {
+        public void Ex13_return_the_biggest () {
 
             // Dado a aplicação esta preparada a aplicação deverá 
 
@@ -361,10 +360,110 @@ namespace entra21_tests {
 
             //Quando
 
-            var thebiggestnumber = exercises.Exercise13_return_the_biggest(1,3,5,4,7,8,9,63,45,5);
+            var thebiggestnumber = exercises.Exercise13 (1, 3, 5, 4, 7, 8, 9, 63, 45, 5);
 
             // Deve
             Assert.Equal (63, thebiggestnumber);
         }
+
+        [Fact]
+
+        public void Ex14_return_in_right_order () {
+
+            // Dado a aplicação esta preparada a aplicação deverá 
+
+            //receber 3 numeros e retornar os mesmo numeros em ordem
+
+            //Given            
+            var exercises = new Exercises ();
+            var digits = new double[3] { 33, -2, 1 };
+
+            // When
+            var result = exercises.Exercise14 (digits);
+            var expected = new double[3] {-2, 1, 33 };
+
+            //Then
+
+            Assert.Equal (expected, result);
+
+        }
+
+        [Fact]
+        public void Ex15_return_How_many_digits_are_multples_of_3_or_5 () {
+
+            // Dado a aplicação esta preparada a aplicação deverá 
+
+            //receber 10 numeros e retornar os que são multiplos de 3
+
+            // setup
+            var exercises = new Exercises ();
+
+            //given
+
+            var numbers = new double[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            //when
+            var result = exercises.Exercise15 (numbers);
+            var expected = (3, 2);
+
+            // then
+
+            Assert.Equal (expected, result);
+
+        }
+
+        [Theory]
+        [InlineData (550.00, 550.00)]
+        [InlineData (1000.00, 800.00)]
+        [InlineData (1540.00, 1155.00)]
+        [InlineData (2500.00, 1750.00)]
+        public void Ex16_Should_return_a_salary_with_some_conditions (double salary, double alteredSalary) {
+
+            var exercises = new Exercises ();
+
+            var result = exercises.Exercicio16 (salary);
+
+            Assert.Equal (alteredSalary, result);
+
+        }
+
+        [Fact]
+        public void Ex17_Factors () {
+
+            //Given
+            var exercises = new Exercises ();
+
+            //When
+            var result = exercises.Exercisce17 (5);
+
+            //Then
+            Assert.Collection (
+                result,
+                i1 => { Assert.Equal (5, i1); },
+                i2 => { Assert.Equal (10, i2); },
+                i3 => { Assert.Equal (15, i3); },
+                i4 => { Assert.Equal (20, i4); },
+                i5 => { Assert.Equal (25, i5); },
+                i6 => { Assert.Equal (30, i6); },
+                i7 => { Assert.Equal (35, i7); },
+                i8 => { Assert.Equal (40, i8); },
+                i9 => { Assert.Equal (45, i9); },
+                i10 => { Assert.Equal (50, i10); }
+            );
+        }
+
+        [Theory]
+        [InlineData (6, 7.8)]
+
+        public void Ex18_Should_return_Price_of_apples_ (double numbApples, double expectedValue) {
+
+            var exercises = new Exercises ();
+
+            var result = exercises.Exercise18(numbApples);
+
+            Assert.Equal (expectedValue, result);
+
+        }
     }
+
 }
