@@ -296,7 +296,6 @@ namespace entra21_tests {
 
 
             // Math.Round((unitApples * 1.30), 2) < o 2 é para limitar 2 casas
-
         }
 
     }
