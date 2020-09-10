@@ -1,11 +1,14 @@
 using System;
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 
-namespace Exercise_3_Arrays {
-    public class TestExercise3 {
+namespace Exercise_3_Arrays 
+{
+    public class TestExercise3
+     {
         [Fact]
-        public void Should_return_True_if_the_input_are_insie_Arrays () {
+        public void Should_return_True_if_the_input_are_insie_Arrays () 
+        {
 
             //Given
             Exercise_3_Arrays exercise = new Exercise_3_Arrays ();
@@ -14,6 +17,7 @@ namespace Exercise_3_Arrays {
             //when
             var result = exercise.Exercise3 (list, 5);
 
+            //Then
             Assert.Equal (true, result);
 
         }
