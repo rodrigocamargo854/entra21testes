@@ -23,7 +23,7 @@ namespace TestProvaQuestao8
                }
             }
 
-            return alunos;
+            return alunos.ToString().Trim();
 
         }
         
