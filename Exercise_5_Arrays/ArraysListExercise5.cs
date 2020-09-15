@@ -9,8 +9,7 @@ namespace Exercise_5_Arrays {
             var underAverage = 0.0;
             var count = 0;
 
-            for (count = 0; count < numbers.Length; count++) 
-            {
+            for (count = 0; count < numbers.Length; count++) {
                 x += numbers[count];
             }
 
