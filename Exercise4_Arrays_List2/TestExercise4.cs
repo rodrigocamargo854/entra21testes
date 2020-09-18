@@ -1,7 +1,8 @@
 using System;
 using Xunit;
 
-namespace Exercise4_Arrays_List2 {
+namespace Exercise4_Arrays_List2 
+{
     public class TestExercise4
 
     {

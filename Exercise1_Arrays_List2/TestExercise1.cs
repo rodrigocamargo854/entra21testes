@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Exercise1_Arrays_List2 {
-    public class TestExercise1 {
+namespace Exercise1_Arrays_List2 
+{
+    public class TestExercise1 
+    {
         [Fact]
         public void Should_Be_Return_A_Vector () 
         {

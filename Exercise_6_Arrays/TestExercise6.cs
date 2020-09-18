@@ -6,10 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Exercise_6_Arrays {
-    public class TestExercise6 {
+namespace Exercise_6_Arrays
+ {
+    public class TestExercise6
+     {
         [Fact]
-        public void Shold_Be_return_a_List_with_result_with_rev_order_and_Inv_Ord () {
+        public void Shold_Be_return_a_List_with_result_with_rev_order_and_Inv_Ord () 
+        {
 
             //Given
             var exercise = new ArraysListExercise6 ();

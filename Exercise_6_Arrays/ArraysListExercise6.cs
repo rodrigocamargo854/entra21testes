@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise_6_Arrays {
-    public class ArraysListExercise6 {
+namespace Exercise_6_Arrays 
+{
+    public class ArraysListExercise6 
+    {
 
         public List<double> Exercise6 (List<double> listA, List<double> listB)
 
