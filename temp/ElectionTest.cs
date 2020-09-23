@@ -49,16 +49,17 @@ namespace temp
         public void should_return_different_ids()
         {
             var election = new Election();
-            (string jose,string cpfJose) = ("Jose","342342543");
-            (string adilson,string cpfAdilson) = ("adilson","342342543");
+            (string jose,string cpfJose) joseCand = ("Jose","342342543");
+            (string adilson,string cpfAdilson) candAdil = ("adilson","342342543");
 
-            var candidates = new List<(string name, string cpf)> {(jose, adilson)};
+            var candidates = new List<(string name, string cpf)> {(joseCand), (candAdil)};
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
-            var joseId = election.GetCandidateIdByName(jose,cpfJose);
-            var adilsonId = election.GetCandidateIdByName(adilson,cpfAdilson);
+            var joseId = election.GetCandidateIdByName(joseCand.jose,joseCand.cpfJose);
+            var adilsonId = election.GetCandidateIdByName(candAdil.adilson,candAdil.cpfAdilson);
 
             Assert.True(joseId != adilsonId);
+            
         }
         //     [Fact]
         //     public void should_vote_twice_in_candidate_Fernando()
