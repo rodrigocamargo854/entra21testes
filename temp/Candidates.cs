@@ -20,11 +20,11 @@ namespace temp
             Cpf = cpf;      
         } 
 
-        public void ClassCreateCandidates(string cand1,string cpf1,string cand2,string cpf2)
+        public void ClassCreateCandidates(string cand1,string cpf1,string cand2,string cp2)
         {
             var election = new Election();
             (string candidateName, string cpf, int votes) candidate1 = (cand1, cpf1, 0);
-            (string candidateName, string cpf, int votes) candidate2 = (cand2, cpf2, 0);
+            (string candidateName, string cpf, int votes) candidate2 = (cand2, cp2, 0);
 
             var candidates = new List<(string name, string cpf, int votes)> { (candidate1), (candidate2) };
 
