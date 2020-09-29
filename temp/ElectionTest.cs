@@ -6,16 +6,29 @@ namespace temp
 {
     public class ElectionTest
     {
+
+
+
+
+
         [Fact]
         public void should_not_create_candidates_when_password_is_incorrect()
         {
             //Given
             var election = new Election();// cria-se obejto Election
             // candidates armazena os dados do candidato que deseja-se criar
-            var candidates = new List<(string name, string cpf, int votes)> { ("José", "8929831321", 0) };
+
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
+
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
+
 
             // Then // acessa o metodo CreateCandidates por meio do selection, com os dados e o pass
-            var created = election.CreateCandidates(candidates, "incorrect");
+            var created = election.CreateCandidates(cantidatesList, "incorrect");
 
             // When // assegura-se que não criou nenhum candidato
             Assert.Null(election.Candidates);
@@ -29,13 +42,18 @@ namespace temp
         {
             //Given
             var election = new Election();
-            (string candidateName, string cpf, int votes) candidate1 = ("José", "9078790", 0);
-            (string candidateName, string cpf, int votes) candidate2 = ("Rodrigo", "93422", 0);
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
-            var candidates = new List<(string name, string cpf, int votes)> { (candidate1), (candidate2) };
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
+
+
 
             // When //acessa o metodo CreateCandidates por meio do selection, com os dados e o pass
-            var created = election.CreateCandidates(candidates, "Pa$$w0rd");
+            var created = election.CreateCandidates(cantidatesList, "Pa$$w0rd");
 
             // Then // candidatos devem ser criados
             Assert.True(created);
@@ -43,17 +61,17 @@ namespace temp
             // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
             Assert.True(election.Candidates.Count == 2);
             //assegura que a pos 0 nome e igual ao nome do candidato 1
-            Assert.True(election.Candidates[0].name == candidate1.candidateName);
+            Assert.True(election.Candidates[0].Name == candidateRodrigo.Name);
             //assegura q a pos 1 do noome e igual ao nome do candidato2
-            Assert.True(election.Candidates[1].name == candidate2.candidateName);
+            Assert.True(election.Candidates[1].Name == candidateMaria.Name);
             //asegura que os nomes são diferentes
-            Assert.True(election.Candidates[1].name != election.Candidates[0].name);
+            Assert.True(election.Candidates[1].Name != election.Candidates[0].Name);
             //assegura que os candidatos não possuem votos
-            Assert.True(election.Candidates[1].votes == 0);
-            Assert.True(election.Candidates[0].votes == 0);
+            Assert.True(election.Candidates[1].Votes == 0);
+            Assert.True(election.Candidates[0].Votes == 0);
             //assegura que os ids são diferentes
-            Assert.True(election.Candidates[1].id != election.Candidates[0].id);
-            Assert.True(election.Candidates[1].id != election.Candidates[0].id);
+            Assert.True(election.Candidates[1].Id != election.Candidates[0].Id);
+            Assert.True(election.Candidates[1].Id != election.Candidates[0].Id);
 
 
         }
@@ -62,25 +80,27 @@ namespace temp
         [Fact]
         public void should_return_different_ids()
         {
-            // Given
-            var election = new Election();// cria-se objeto do tipo Election
-            //Cria-se tuplas com dandidatos
-            (string jose, string cpfJose, int votes) joseCand = ("Jose", "342342543", 0);
-            (string adilson, string cpfAdilson, int votes) candAdil = ("adilson", "342342543", 0);
+            //Given
+            var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
+
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
 
             //When
-            //dentro de candidates cria-se uma lista de tuplas para os candidatos
-            var candidates = new List<(string name, string cpf, int votes)> { (joseCand), (candAdil) };
-            election.CreateCandidates(candidates, "Pa$$w0rd"); // cria-se candidatos
+
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
 
             //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
-            var joseId = election.GetCandidateIdByName(joseCand.jose, joseCand.cpfJose, joseCand.votes);
-            var adilsonId = election.GetCandidateIdByName(candAdil.adilson, candAdil.cpfAdilson, candAdil.votes);
+            var joseId = election.GetCandidateIdByName(cantidatesList, "Jose");
+            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
 
             //Then
-            //Assegura-se que os ids de ambos os candidatos sejam diferentes
-            Assert.True(joseId != adilsonId);
-            
+            Assert.True(joseId != mariaId);
+
 
 
 
@@ -88,77 +108,90 @@ namespace temp
         [Fact]
         public void should_vote_twice_in_candidate_Jose()
         {
+
             //Given
             var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
-            (string jose, string cpfJose, int votes) joseCand = ("Jose", "342342543", 0);
-            (string adilson, string cpfAdilson, int votes) candAdil = ("adilson", "342342543", 0);
-            var candidates = new List<(string name, string cpf, int votes)> { (joseCand), (candAdil) };
-            election.CreateCandidates(candidates, "Pa$$w0rd");
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
 
-            var joseId = election.GetCandidateIdByName(joseCand.jose, joseCand.cpfJose, joseCand.votes);
-            var adilsonId = election.GetCandidateIdByName(candAdil.adilson, candAdil.cpfAdilson, candAdil.votes);
+            //When
+
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
+                                                                   //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
+            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
+            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
 
             //when
-            election.Vote(election.Candidates[0].id);
-            election.Vote(election.Candidates[0].id);
+            election.Vote(election.Candidates[0].Id);
+            election.Vote(election.Candidates[0].Id);
 
             //Then
-            Assert.Equal(2, election.Candidates[0].votes);
-            Assert.Equal(0, election.Candidates[1].votes);
+            Assert.Equal(2, election.Candidates[0].Votes);
+            Assert.Equal(0, election.Candidates[1].Votes);
 
         }
 
         [Fact]
-        public void should_return_Ana_as_winner_when_only_Jose_receives_votes()
+        public void should_return_Rodrigo_as_winner_when_only_Rodrigo_receives_votes()
         {
+            //Given
             var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
-            (string jose, string cpfJose, int votes) joseCand = ("Jose", "342342543", 0);
-            (string adilson, string cpfAdilson, int votes) candAdil = ("adilson", "342342543", 0);
-            var candidates = new List<(string name, string cpf, int votes)> { (joseCand), (candAdil) };
-            election.CreateCandidates(candidates, "Pa$$w0rd");
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
 
+            //When
 
-            var joseId = election.GetCandidateIdByName(joseCand.jose, joseCand.cpfJose, joseCand.votes);
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
+                                                                   //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
+            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
+            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
 
             // Given
-            election.Vote(election.Candidates[0].id);
-            election.Vote(election.Candidates[0].id);
+            election.Vote(election.Candidates[0].Id);
+            election.Vote(election.Candidates[0].Id);
             // When
 
             var winners = election.GetWinners();
 
             //Then
             Assert.True(winners.Count == 1);
-            Assert.Equal(election.Candidates[0].id, winners[0].id);
-            Assert.Equal(2, winners[0].votes);
+            Assert.Equal(election.Candidates[0].Id, winners[0].Id);
+            Assert.Equal(2, winners[0].Votes);
         }
 
         [Fact]
         public void should_return_both_candidates_when_occurs_draw()
         {
-            // Dado / Setup
-            // OBJETO election
             var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
-            (string jose, string cpfJose, int votes) joseCand = ("Jose", "342342543", 0);
-            (string adilson, string cpfAdilson, int votes) candAdil = ("adilson", "342342543", 0);
-            var candidates = new List<(string name, string cpf, int votes)> { (joseCand), (candAdil) };
-            election.CreateCandidates(candidates, "Pa$$w0rd");
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
 
-            var joseId = election.GetCandidateIdByName(joseCand.jose, joseCand.cpfJose, joseCand.votes);
-            var adilsonId = election.GetCandidateIdByName(candAdil.adilson, candAdil.cpfAdilson, candAdil.votes);
+            //When
 
-            election.Vote(joseId);
-            election.Vote(adilsonId);
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
 
-
+            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
+            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
+            //To vote
+            election.Vote(rodrigoId);
+            election.Vote(mariaId);
 
             // Quando / Ação
-            // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            election.Vote(joseId);
-            election.Vote(adilsonId);
             var winners = election.GetWinners();
 
             // Deve / Asserções
@@ -169,12 +202,17 @@ namespace temp
         {
             //Given
 
-            // OBJETO election /// criando candidatos
+            // criando candidatos
             var election = new Election();
-            (string candidateName, string cpf, int votes) candidate1 = ("José", "9078790", 0);
-            (string candidateName, string cpf, int votes) candidate2 = ("maria", "9343422", 0);
-            var candidates = new List<(string name, string cpf, int votes)> { (candidate1), (candidate2) };
-            var created = election.CreateCandidates(candidates, "Pa$$w0rd");
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
+
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
+
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
 
             // When
 
@@ -193,21 +231,23 @@ namespace temp
         {
             // Dado / Setup
 
-            // OBJETO election
-            var election = new Election();
-            (string candidateName, string cpf, int votes) candidate1 = ("José", "9078790", 0);
+                        var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
-            var candidates = new List<(string name, string cpf, int votes)> { (candidate1) };
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
 
-            // Quando / Ação
+            //When
 
-            // Estamos acessando o MÉTODO CreateCandidates do OBJETO election
-            var created = election.CreateCandidates(candidates, "Pa$$w0rd");
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
 
-            var result = election.GetCandidateIdBycpf(candidate1.cpf);
+            var result = election.GetCandidateIdBycpf(candidateRodrigo.Cpf);
             // Deve / Asserções
 
-            Assert.Equal(election.Candidates[0].id, result);
+            Assert.Equal(election.Candidates[0].Id, result);
 
         }
 

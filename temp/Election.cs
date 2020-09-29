@@ -9,17 +9,13 @@ namespace temp
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        public List<(Guid id, string name, string cpf, int votes)> Candidates { get; set; }
+        public List<Candidates> Candidates { get; private set; }
 
-        public bool CreateCandidates(List<(string names, string cpf, int votes)> candidateNames, string password)
+        public bool CreateCandidates(List<Candidates> candidateNames, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                Candidates = candidateNames.Select(candidateName =>
-                {
-                    return (Guid.NewGuid(), candidateName.names, candidateName.cpf, 0);
-                }).ToList();
-
+                Candidates = candidateNames;
                 return true;
             }
 
@@ -27,14 +23,13 @@ namespace temp
             {
                 return false;
             }
+
         }
-
-
 
         // ToDo: Criar método que retorne um Guid que represente o candidato pesquisado por CPF
         public Guid GetCandidateIdBycpf(string cpf)
         {
-            return Candidates.Find(x => x.cpf == cpf).id;
+            return Candidates.Find(x => x.Cpf == cpf).Id;
 
         }
 
@@ -46,7 +41,7 @@ namespace temp
 
             for (int i = 0; i < name.Count; i++)
             {
-                if(Candidates[i].name == name[i])
+                if(Candidates[i].Name == name[i])
                 {
                     repeatNames.Add(name[i]);
                 }    
@@ -57,34 +52,37 @@ namespace temp
 
         }
 
-        public Guid GetCandidateIdByName(string name, string cpf, int votes)
+        public Guid GetCandidateIdByName(List<Candidates> candidatesList, string name)
         {
-            return Candidates.First(x => x.name == name).id;
+            return candidatesList.First(x => x.Name == name).Id;
+        }
+           public void Vote(Guid id)
+        {
+            Candidates.First(candidates => candidates.Id == id).Votes++;
         }
 
-        public void Vote(Guid id)
-        {
-            Candidates = Candidates.Select(candidate =>
-            {
-                return candidate.id == id ? (Guid.NewGuid(),
-                candidate.name, candidate.cpf, candidate.votes + 1)
-                : candidate;
-            }).ToList();
-        }
+      
 
-        public List<(Guid id, string name, string cpf, int votes)> GetWinners()
-        {
-            var winners = new List<(Guid id, string name, string cpf, int votes)> { Candidates[0] };
+        public List<Candidates> GetWinners()
+        {   
+            // winners receve uma lista que receberá os dados do candidato que estará na possicao 0(primeiro lugar)
+            var winners = new List<Candidates> { Candidates[0] };
 
             for (int i = 1; i < Candidates.Count; i++)
-            {
-                if (Candidates[i].votes > winners[0].votes)
+            {   
+                //se o candidatos que estiver no index  que for esta conter mais votos que o primeiro candidato
+                if (Candidates[i].Votes > winners[0].Votes)
                 {
+                    //limpa-se a lista winners
                     winners.Clear();
+                    //adiciona o candidato em questao
                     winners.Add(Candidates[i]);
                 }
-                else if (Candidates[i].votes == winners[0].votes)
+
+                //se o index que o for se encontra for igual ao numero de votos do primeiro candidato
+                else if (Candidates[i].Votes == winners[0].Votes)
                 {
+                    
                     winners.Add(Candidates[i]);
                 }
             }
