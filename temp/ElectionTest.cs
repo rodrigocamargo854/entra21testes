@@ -8,9 +8,6 @@ namespace temp
     {
 
 
-
-
-
         [Fact]
         public void should_not_create_candidates_when_password_is_incorrect()
         {
@@ -33,6 +30,7 @@ namespace temp
             // When // assegura-se que não criou nenhum candidato
             Assert.Null(election.Candidates);
             Assert.False(created);
+           
 
 
         }
@@ -59,47 +57,48 @@ namespace temp
             Assert.True(created);
 
             // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
-            Assert.True(election.Candidates.Count == 2);
+            Assert.True(cantidatesList.Count == 2);
             //assegura que a pos 0 nome e igual ao nome do candidato 1
-            Assert.True(election.Candidates[0].Name == candidateRodrigo.Name);
+            Assert.True(cantidatesList[0].Name == candidateRodrigo.Name);
             //assegura q a pos 1 do noome e igual ao nome do candidato2
-            Assert.True(election.Candidates[1].Name == candidateMaria.Name);
+            Assert.True(cantidatesList[1].Name == candidateMaria.Name);
             //asegura que os nomes são diferentes
-            Assert.True(election.Candidates[1].Name != election.Candidates[0].Name);
+            Assert.True(cantidatesList[1].Name != cantidatesList[0].Name);
             //assegura que os candidatos não possuem votos
-            Assert.True(election.Candidates[1].Votes == 0);
-            Assert.True(election.Candidates[0].Votes == 0);
+            Assert.True(cantidatesList[1].Votes == 0);
+            Assert.True(cantidatesList[0].Votes == 0);
             //assegura que os ids são diferentes
-            Assert.True(election.Candidates[1].Id != election.Candidates[0].Id);
-            Assert.True(election.Candidates[1].Id != election.Candidates[0].Id);
+            Assert.True(cantidatesList[1].Id != cantidatesList[0].Id);
+            Assert.True(cantidatesList[1].Id != cantidatesList[0].Id);
 
 
         }
-
 
         [Fact]
         public void should_return_different_ids()
         {
             //Given
             var election = new Election();
-            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateJose = new Candidates("José", "000.123.452-00", 0);
             var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
 
             var cantidatesList = new List<Candidates>()
             {
-                candidateRodrigo, candidateMaria
+                candidateJose, candidateMaria
             };
 
             //When
 
-            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
-
+            var candidates = election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
+            
             //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
-            var joseId = election.GetCandidateIdByName(cantidatesList, "Jose");
-            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
+            var joseId = election.GetCandidateIdByName("José");
+            var mariaId = election.GetCandidateIdByName( "Maria");
 
             //Then
-            Assert.True(joseId != mariaId);
+            Assert.NotEqual(joseId,mariaId);
+
+             
 
 
 
@@ -123,16 +122,16 @@ namespace temp
 
             election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
                                                                    //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
-            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
-            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
+            var rodrigoId = election.GetCandidateIdByName("Rodrigo");
+            var mariaId = election.GetCandidateIdByName("Maria");
 
             //when
-            election.Vote(election.Candidates[0].Id);
-            election.Vote(election.Candidates[0].Id);
+            election.Vote(cantidatesList[0].Id);
+            election.Vote(cantidatesList[0].Id);
 
             //Then
-            Assert.Equal(2, election.Candidates[0].Votes);
-            Assert.Equal(0, election.Candidates[1].Votes);
+            Assert.Equal(2, cantidatesList[0].Votes);
+            Assert.Equal(0, cantidatesList[1].Votes);
 
         }
 
@@ -153,19 +152,19 @@ namespace temp
 
             election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
                                                                    //joseId recebe o retorno do metodo GetCandidateIdByName por meio do election
-            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
-            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
+            var rodrigoId = election.GetCandidateIdByName( "Rodrigo");
+            var mariaId = election.GetCandidateIdByName( "Maria");
 
             // Given
-            election.Vote(election.Candidates[0].Id);
-            election.Vote(election.Candidates[0].Id);
+            election.Vote(cantidatesList[0].Id);
+            election.Vote(cantidatesList[0].Id);
             // When
 
             var winners = election.GetWinners();
 
             //Then
             Assert.True(winners.Count == 1);
-            Assert.Equal(election.Candidates[0].Id, winners[0].Id);
+            Assert.Equal(cantidatesList[0].Id, winners[0].Id);
             Assert.Equal(2, winners[0].Votes);
         }
 
@@ -185,8 +184,8 @@ namespace temp
 
             election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
 
-            var rodrigoId = election.GetCandidateIdByName(cantidatesList, "Rodrigo");
-            var mariaId = election.GetCandidateIdByName(cantidatesList, "Maria");
+            var rodrigoId = election.GetCandidateIdByName("Rodrigo");
+            var mariaId = election.GetCandidateIdByName("Maria");
             //To vote
             election.Vote(rodrigoId);
             election.Vote(mariaId);
@@ -216,9 +215,9 @@ namespace temp
 
             // When
 
-            var input = new List<string> { "José" };
+            var input = new List<string> { "Rodrigo" };
             var result = election.ReturnRepeatNames(input);
-            var expected = new List<string> { "José" };
+            var expected = new List<string> { "Rodrigo" };
 
             // Then
             Assert.Equal(expected, result);
@@ -247,7 +246,7 @@ namespace temp
             var result = election.GetCandidateIdBycpf(candidateRodrigo.Cpf);
             // Deve / Asserções
 
-            Assert.Equal(election.Candidates[0].Id, result);
+            Assert.Equal(cantidatesList[0].Id, result);
 
         }
 
