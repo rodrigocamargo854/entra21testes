@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Should;
 
 namespace temp
 {
     public class Election
     {
+
+
+
         // Esta propriedade tem a sua escrita privada, ou seja, ninguém de fora da classe pode alterar seu valor
         // Propriedade privada SEMPRE em camelcase
         private List<Candidates> candidates { get; set; }//para edição
@@ -14,16 +18,23 @@ namespace temp
         // Propriedade apenas com GET pode ser usada com arrow
 
         // para leitura e ainda sim ela ira retornar o candidates como proteção
-        public IReadOnlyCollection<Candidates> Candidates { get { return candidates; } } 
+        public IReadOnlyCollection<Candidates> Candidates { get { return candidates; } }
         // public IReadOnlyCollection<Candidates> Candidates => candidates; 
 
-
-
+        public Election()
+        {
+            candidates = new List<Candidates>();
+        }
 
         public bool CreateCandidates(List<Candidates> candidateNames, string password)
         {
             if (password == "Pa$$w0rd")
             {
+                if (candidateNames == null)
+                {
+                    return true;
+                }
+
                 candidates = candidateNames;
                 return true;
             }
@@ -35,7 +46,6 @@ namespace temp
 
         }
 
-        
 
         // ToDo: Criar método que retorne um Guid que represente o candidato pesquisado por CPF
         public Guid GetCandidateIdBycpf(string cpf)
@@ -72,11 +82,10 @@ namespace temp
         }
 
 
-
         public List<Candidates> GetWinners()
         {
 
-            
+
             // winners receve uma lista que receberá os dados do candidato que estará na possicao 0(primeiro lugar)
             var winners = new List<Candidates> { candidates[0] };
 
@@ -102,6 +111,7 @@ namespace temp
 
         }
 
+        
 
     }
 }
