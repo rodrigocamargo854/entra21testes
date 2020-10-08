@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Should;
 
-namespace temp
+
+namespace Domain
 {
     public class Election
     {
@@ -76,10 +76,12 @@ namespace temp
         {
             return candidates.First(x => x.Name == name).Id;
         }
-        public void Vote(Guid id)
-        {
-            Candidates.First(candidates => candidates.Id == id).Votes++;
-        }
+        
+        // public void Vote(Guid id)
+        // {
+        //    var x = candidates.First(candidates => candidates.Id == id);
+        //    x.Vote();
+        // }
 
 
         public List<Candidates> GetWinners()

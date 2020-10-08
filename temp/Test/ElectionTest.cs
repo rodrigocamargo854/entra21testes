@@ -1,16 +1,14 @@
-
+using System;
 using Xunit;
-using System.Collections.Generic;
-using System.Linq;
-using Should;
+using Domain;
 
-namespace temp
+namespace Tests
 {
     public class ElectionTest
     {
         //todo a test for receive null candidate
 
-        [Fact]
+        [Fact] 
         public void should_not_create_candidates_when_password_is_incorrect()
         {
             //Given
@@ -124,8 +122,11 @@ namespace temp
             var mariaId = election.GetCandidateIdByName("Maria");
 
             //when
-            election.Vote(election.Candidates.ElementAt(0).Id);
-            election.Vote(election.Candidates.ElementAt(0).Id);
+            candidateRodrigo.Vote();
+            candidateRodrigo.Vote();
+
+            // election.Vote(election.Candidates.ElementAt(0).Id);
+            // election.Vote(election.Candidates.ElementAt(0).Id);
 
             //Then
             Assert.Equal(2, election.Candidates.ElementAt(0).Votes);
@@ -154,8 +155,11 @@ namespace temp
             var mariaId = election.GetCandidateIdByName("Maria");
 
             // Given
-            election.Vote(election.Candidates.ElementAt(0).Id);
-            election.Vote(election.Candidates.ElementAt(0).Id);
+            candidateRodrigo.Vote();
+            candidateRodrigo.Vote();
+    
+            // election.Vote(election.Candidates.ElementAt(0).Id);
+            // election.Vote(election.Candidates.ElementAt(0).Id);
             // When
 
             var winners = election.GetWinners();
@@ -185,8 +189,8 @@ namespace temp
             var rodrigoId = election.GetCandidateIdByName("Rodrigo");
             var mariaId = election.GetCandidateIdByName("Maria");
             //To vote
-            election.Vote(rodrigoId);
-            election.Vote(mariaId);
+            candidateRodrigo.Vote();
+            candidateMaria.Vote();
 
             // Quando / Ação
             var winners = election.GetWinners();
@@ -310,6 +314,28 @@ namespace temp
             // list.Add(item);
             // list.ShouldNotBeEmpty();
             // list.ShouldContain(item);
+        }
+
+          [Fact]
+        public void Should_return_True_if_Candidates_are_Null()
+        {
+            // Dado / Setup
+
+            var election = new Election();
+            var candidateRodrigo = new Candidates("Rodrigo", "000.123.452-00", 0);
+            var candidateMaria = new Candidates("Maria", "112.342.543-88", 0);
+
+            var cantidatesList = new List<Candidates>()
+            {
+                candidateRodrigo, candidateMaria
+            };
+            election.CreateCandidates(cantidatesList, "Pa$$w0rd"); // cria-se candidatos
+
+            //When
+            var result = election.GetCandidateIdBycpf(candidateRodrigo.Cpf);
+            // Deve / Asserções
+            election.Candidates.ElementAt(0).ShouldNotBeNull();
+
         }
 
 

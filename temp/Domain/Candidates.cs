@@ -2,7 +2,8 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
-namespace temp
+
+namespace Domain
 {
     public class Candidates
     {
@@ -10,7 +11,7 @@ namespace temp
         public string Name { get; set; }
         public string Cpf { get; set; }
 
-        public int Votes { get; set; }
+        public int Votes { get; private set; }
 
 
 
@@ -22,15 +23,10 @@ namespace temp
             Votes = votes;
         }
 
-        public int Vote(Guid id)
+        public void Vote()
         {
-            return Votes = Votes++;
-
-
+            Votes++;
         }
-
-
-
 
 
     }

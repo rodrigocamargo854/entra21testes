@@ -1,11 +1,8 @@
-
+using System;
 using Xunit;
-using System.Collections.Generic;
-using System.Linq;
-using Should;
+using Domain;
 
-
-namespace temp
+namespace Tests
 {
     public class CandidateTest
     {
@@ -16,27 +13,18 @@ namespace temp
         {
             //Given
             var candidate = new Candidates("Name", "cpf", 0);
-            candidate.Vote(candidate.Id);
-            candidate.Vote(candidate.Id);
-
+            candidate.Vote();
+            candidate.Vote();
 
 
             //Then
             Assert.NotNull(candidate);
-            Assert.Equal(candidate.Votes, 0);
+            Assert.Equal(candidate.Votes, 2);
             candidate.Name.ShouldBeType(typeof(string));
             candidate.Cpf.ShouldBeType(typeof(string));
 
         }
 
-
-
-
-
-
-
-
     }
 }
-
 
