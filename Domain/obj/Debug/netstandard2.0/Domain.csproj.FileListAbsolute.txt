@@ -1,0 +1,12 @@
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\xunit.runner.visualstudio.testadapter.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\xunit.runner.reporters.net452.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\xunit.runner.utility.net452.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\xunit.abstractions.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\Domain.deps.json
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\Domain.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\bin\Debug\netstandard2.0\Domain.pdb
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\obj\Debug\netstandard2.0\Domain.csprojAssemblyReference.cache
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\obj\Debug\netstandard2.0\Domain.AssemblyInfoInputs.cache
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\obj\Debug\netstandard2.0\Domain.AssemblyInfo.cs
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\obj\Debug\netstandard2.0\Domain.dll
+P:\Rodrigo\entra21testes\entra21testes\temp\Domain\obj\Debug\netstandard2.0\Domain.pdb
