@@ -343,7 +343,7 @@ namespace Tests
         [Fact]
         public void Should_return_False_and_not_Vote_if_cpf_is_invalid()
         {
-      var election = new Election();
+            var election = new Election();
             var candidateRodrigo = new Candidate("Rodrigo", "910.371.860-36", 0);
             var candidateMaria = new Candidate("Maria", "764.122.990-50", 0);
 
@@ -383,8 +383,8 @@ namespace Tests
             // Dado / Setup
             // OBJETO election
             var election = new Election();
-            var Jose = new Candidate("José", "895.456.214-78",0);
-            var candidates = new List<Candidate>{Jose};
+            var Jose = new Candidate("José", "895.456.214-78", 0);
+            var candidates = new List<Candidate> { Jose };
 
             election.CreateCandidates(candidates, "Pa$$w0rd");
 
@@ -397,11 +397,12 @@ namespace Tests
             Assert.False(voteResult);
 
             voteResult.ShouldEqual(false);
-        
+            voteResult.ShouldBeFalse();
+
 
         }
 
-
+        
 
     }
 }
